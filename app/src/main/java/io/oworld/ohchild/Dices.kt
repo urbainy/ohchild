@@ -13,6 +13,7 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
+
 @Preview(showBackground = true)
 @Composable
 fun Dice1() {
@@ -23,11 +24,11 @@ fun Dice1() {
     ) {
         drawRoundRect(
             cornerRadius = CornerRadius(30f, 30f),
-            color = Color.Black,
+            color = Color.Gray,
             size = Size(width = 100.dp.toPx(), height = 100.dp.toPx()),
             style = Stroke(width = 10.dp.toPx())
         )
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(50.dp.toPx(), 50.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(50.dp.toPx(), 50.dp.toPx()))
     }
 }
 
@@ -41,12 +42,12 @@ fun Dice2() {
     ) {
         drawRoundRect(
             cornerRadius = CornerRadius(30f, 30f),
-            color = Color.Black,
+            color = Color.Gray,
             size = Size(width = 100.dp.toPx(), height = 100.dp.toPx()),
             style = Stroke(width = 10.dp.toPx())
         )
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(30.dp.toPx(), 50.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(70.dp.toPx(), 50.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(30.dp.toPx(), 50.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(70.dp.toPx(), 50.dp.toPx()))
     }
 }
 
@@ -60,13 +61,13 @@ fun Dice3() {
     ) {
         drawRoundRect(
             cornerRadius = CornerRadius(30f, 30f),
-            color = Color.Black,
+            color = Color.Gray,
             size = Size(width = 100.dp.toPx(), height = 100.dp.toPx()),
             style = Stroke(width = 10.dp.toPx())
         )
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(20.dp.toPx(), 50.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(50.dp.toPx(), 50.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(80.dp.toPx(), 50.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(20.dp.toPx(), 50.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(50.dp.toPx(), 50.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(80.dp.toPx(), 50.dp.toPx()))
     }
 }
 
@@ -80,13 +81,13 @@ fun Dice321() {
     ) {
         drawRoundRect(
             cornerRadius = CornerRadius(30f, 30f),
-            color = Color.Black,
+            color = Color.Gray,
             size = Size(width = 100.dp.toPx(), height = 100.dp.toPx()),
             style = Stroke(width = 10.dp.toPx())
         )
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(50.dp.toPx(), 30.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(30.dp.toPx(), 70.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(70.dp.toPx(), 70.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(50.dp.toPx(), 30.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(30.dp.toPx(), 70.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(70.dp.toPx(), 70.dp.toPx()))
     }
 }
 
@@ -100,14 +101,14 @@ fun Dice422() {
     ) {
         drawRoundRect(
             cornerRadius = CornerRadius(30f, 30f),
-            color = Color.Black,
+            color = Color.Gray,
             size = Size(width = 100.dp.toPx(), height = 100.dp.toPx()),
             style = Stroke(width = 10.dp.toPx())
         )
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(30.dp.toPx(), 30.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(30.dp.toPx(), 70.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(70.dp.toPx(), 30.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(70.dp.toPx(), 70.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(30.dp.toPx(), 30.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(30.dp.toPx(), 70.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(70.dp.toPx(), 30.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(70.dp.toPx(), 70.dp.toPx()))
     }
 }
 
@@ -121,14 +122,14 @@ fun Dice431() {
     ) {
         drawRoundRect(
             cornerRadius = CornerRadius(30f, 30f),
-            color = Color.Black,
+            color = Color.Gray,
             size = Size(width = 100.dp.toPx(), height = 100.dp.toPx()),
             style = Stroke(width = 10.dp.toPx())
         )
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(50.dp.toPx(), 30.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(20.dp.toPx(), 70.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(50.dp.toPx(), 70.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(80.dp.toPx(), 70.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(50.dp.toPx(), 30.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(20.dp.toPx(), 70.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(50.dp.toPx(), 70.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(80.dp.toPx(), 70.dp.toPx()))
     }
 }
 
@@ -142,15 +143,15 @@ fun Dice532() {
     ) {
         drawRoundRect(
             cornerRadius = CornerRadius(30f, 30f),
-            color = Color.Black,
+            color = Color.Gray,
             size = Size(width = 100.dp.toPx(), height = 100.dp.toPx()),
             style = Stroke(width = 10.dp.toPx())
         )
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(35.dp.toPx(), 30.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(65.dp.toPx(), 30.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(20.dp.toPx(), 70.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(50.dp.toPx(), 70.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(80.dp.toPx(), 70.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(35.dp.toPx(), 30.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(65.dp.toPx(), 30.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(20.dp.toPx(), 70.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(50.dp.toPx(), 70.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(80.dp.toPx(), 70.dp.toPx()))
     }
 }
 
@@ -164,15 +165,15 @@ fun Dice541() {
     ) {
         drawRoundRect(
             cornerRadius = CornerRadius(30f, 30f),
-            color = Color.Black,
+            color = Color.Gray,
             size = Size(width = 100.dp.toPx(), height = 100.dp.toPx()),
             style = Stroke(width = 10.dp.toPx())
         )
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(30.dp.toPx(), 30.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(30.dp.toPx(), 70.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(50.dp.toPx(), 50.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(70.dp.toPx(), 30.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(70.dp.toPx(), 70.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(30.dp.toPx(), 30.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(30.dp.toPx(), 70.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(50.dp.toPx(), 50.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(70.dp.toPx(), 30.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(70.dp.toPx(), 70.dp.toPx()))
     }
 }
 
@@ -186,15 +187,15 @@ fun Dice5C() {
     ) {
         drawRoundRect(
             cornerRadius = CornerRadius(30f, 30f),
-            color = Color.Black,
+            color = Color.Gray,
             size = Size(width = 100.dp.toPx(), height = 100.dp.toPx()),
             style = Stroke(width = 10.dp.toPx())
         )
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(50.dp.toPx(), 20.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(21.dp.toPx(), 46.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(32.dp.toPx(), 80.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(69.dp.toPx(), 80.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(78.dp.toPx(), 46.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(50.dp.toPx(), 20.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(21.dp.toPx(), 46.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(32.dp.toPx(), 80.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(69.dp.toPx(), 80.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(78.dp.toPx(), 46.dp.toPx()))
     }
 }
 
@@ -208,16 +209,16 @@ fun Dice633() {
     ) {
         drawRoundRect(
             cornerRadius = CornerRadius(30f, 30f),
-            color = Color.Black,
+            color = Color.Gray,
             size = Size(width = 100.dp.toPx(), height = 100.dp.toPx()),
             style = Stroke(width = 10.dp.toPx())
         )
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(20.dp.toPx(), 30.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(50.dp.toPx(), 30.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(80.dp.toPx(), 30.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(20.dp.toPx(), 70.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(50.dp.toPx(), 70.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(80.dp.toPx(), 70.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(20.dp.toPx(), 30.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(50.dp.toPx(), 30.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(80.dp.toPx(), 30.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(20.dp.toPx(), 70.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(50.dp.toPx(), 70.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(80.dp.toPx(), 70.dp.toPx()))
     }
 }
 
@@ -231,16 +232,16 @@ fun Dice642() {
     ) {
         drawRoundRect(
             cornerRadius = CornerRadius(30f, 30f),
-            color = Color.Black,
+            color = Color.Gray,
             size = Size(width = 100.dp.toPx(), height = 100.dp.toPx()),
             style = Stroke(width = 10.dp.toPx())
         )
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(40.dp.toPx(), 30.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(60.dp.toPx(), 30.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(20.dp.toPx(), 70.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(40.dp.toPx(), 70.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(60.dp.toPx(), 70.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(80.dp.toPx(), 70.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(40.dp.toPx(), 30.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(60.dp.toPx(), 30.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(20.dp.toPx(), 70.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(40.dp.toPx(), 70.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(60.dp.toPx(), 70.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(80.dp.toPx(), 70.dp.toPx()))
     }
 }
 
@@ -254,16 +255,16 @@ fun Dice6C() {
     ) {
         drawRoundRect(
             cornerRadius = CornerRadius(30f, 30f),
-            color = Color.Black,
+            color = Color.Gray,
             size = Size(width = 100.dp.toPx(), height = 100.dp.toPx()),
             style = Stroke(width = 10.dp.toPx())
         )
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(50.dp.toPx(), 20.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(22.dp.toPx(), 35.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(22.dp.toPx(), 65.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(50.dp.toPx(), 80.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(78.dp.toPx(), 65.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(78.dp.toPx(), 35.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(50.dp.toPx(), 20.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(22.dp.toPx(), 35.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(22.dp.toPx(), 65.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(50.dp.toPx(), 80.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(78.dp.toPx(), 65.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(78.dp.toPx(), 35.dp.toPx()))
     }
 }
 
@@ -277,17 +278,17 @@ fun Dice7322() {
     ) {
         drawRoundRect(
             cornerRadius = CornerRadius(30f, 30f),
-            color = Color.Black,
+            color = Color.Gray,
             size = Size(width = 100.dp.toPx(), height = 100.dp.toPx()),
             style = Stroke(width = 10.dp.toPx())
         )
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(35.dp.toPx(), 20.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(65.dp.toPx(), 20.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(35.dp.toPx(), 50.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(65.dp.toPx(), 50.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(20.dp.toPx(), 80.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(50.dp.toPx(), 80.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(80.dp.toPx(), 80.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(35.dp.toPx(), 20.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(65.dp.toPx(), 20.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(35.dp.toPx(), 50.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(65.dp.toPx(), 50.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(20.dp.toPx(), 80.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(50.dp.toPx(), 80.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(80.dp.toPx(), 80.dp.toPx()))
     }
 }
 
@@ -301,17 +302,17 @@ fun Dice7C() {
     ) {
         drawRoundRect(
             cornerRadius = CornerRadius(30f, 30f),
-            color = Color.Black,
+            color = Color.Gray,
             size = Size(width = 100.dp.toPx(), height = 100.dp.toPx()),
             style = Stroke(width = 10.dp.toPx())
         )
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(50.dp.toPx(), 20.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(22.dp.toPx(), 35.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(22.dp.toPx(), 65.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(50.dp.toPx(), 50.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(50.dp.toPx(), 80.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(78.dp.toPx(), 65.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(78.dp.toPx(), 35.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(50.dp.toPx(), 20.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(22.dp.toPx(), 35.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(22.dp.toPx(), 65.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(50.dp.toPx(), 50.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(50.dp.toPx(), 80.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(78.dp.toPx(), 65.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(78.dp.toPx(), 35.dp.toPx()))
     }
 }
 
@@ -325,18 +326,18 @@ fun Dice844() {
     ) {
         drawRoundRect(
             cornerRadius = CornerRadius(30f, 30f),
-            color = Color.Black,
+            color = Color.Gray,
             size = Size(width = 100.dp.toPx(), height = 100.dp.toPx()),
             style = Stroke(width = 10.dp.toPx())
         )
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(20.dp.toPx(), 30.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(40.dp.toPx(), 30.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(60.dp.toPx(), 30.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(80.dp.toPx(), 30.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(20.dp.toPx(), 70.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(40.dp.toPx(), 70.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(60.dp.toPx(), 70.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(80.dp.toPx(), 70.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(20.dp.toPx(), 30.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(40.dp.toPx(), 30.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(60.dp.toPx(), 30.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(80.dp.toPx(), 30.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(20.dp.toPx(), 70.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(40.dp.toPx(), 70.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(60.dp.toPx(), 70.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(80.dp.toPx(), 70.dp.toPx()))
     }
 }
 
@@ -350,18 +351,18 @@ fun Dice8332() {
     ) {
         drawRoundRect(
             cornerRadius = CornerRadius(30f, 30f),
-            color = Color.Black,
+            color = Color.Gray,
             size = Size(width = 100.dp.toPx(), height = 100.dp.toPx()),
             style = Stroke(width = 10.dp.toPx())
         )
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(35.dp.toPx(), 20.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(65.dp.toPx(), 20.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(20.dp.toPx(), 50.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(50.dp.toPx(), 50.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(80.dp.toPx(), 50.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(20.dp.toPx(), 80.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(50.dp.toPx(), 80.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(80.dp.toPx(), 80.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(35.dp.toPx(), 20.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(65.dp.toPx(), 20.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(20.dp.toPx(), 50.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(50.dp.toPx(), 50.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(80.dp.toPx(), 50.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(20.dp.toPx(), 80.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(50.dp.toPx(), 80.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(80.dp.toPx(), 80.dp.toPx()))
     }
 }
 
@@ -375,18 +376,18 @@ fun Dice8C() {
     ) {
         drawRoundRect(
             cornerRadius = CornerRadius(30f, 30f),
-            color = Color.Black,
+            color = Color.Gray,
             size = Size(width = 100.dp.toPx(), height = 100.dp.toPx()),
             style = Stroke(width = 10.dp.toPx())
         )
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(37.dp.toPx(), 20.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(20.dp.toPx(), 37.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(20.dp.toPx(), 63.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(37.dp.toPx(), 80.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(63.dp.toPx(), 80.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(80.dp.toPx(), 63.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(80.dp.toPx(), 37.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(63.dp.toPx(), 20.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(37.dp.toPx(), 20.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(20.dp.toPx(), 37.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(20.dp.toPx(), 63.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(37.dp.toPx(), 80.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(63.dp.toPx(), 80.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(80.dp.toPx(), 63.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(80.dp.toPx(), 37.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(63.dp.toPx(), 20.dp.toPx()))
     }
 }
 
@@ -400,18 +401,18 @@ fun Dice9() {
     ) {
         drawRoundRect(
             cornerRadius = CornerRadius(30f, 30f),
-            color = Color.Black,
+            color = Color.Gray,
             size = Size(width = 100.dp.toPx(), height = 100.dp.toPx()),
             style = Stroke(width = 10.dp.toPx())
         )
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(20.dp.toPx(), 20.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(50.dp.toPx(), 20.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(80.dp.toPx(), 20.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(20.dp.toPx(), 50.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(50.dp.toPx(), 50.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(80.dp.toPx(), 50.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(20.dp.toPx(), 80.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(50.dp.toPx(), 80.dp.toPx()))
-        drawCircle(Color.Black, 10.dp.toPx(), Offset(80.dp.toPx(), 80.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(20.dp.toPx(), 20.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(50.dp.toPx(), 20.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(80.dp.toPx(), 20.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(20.dp.toPx(), 50.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(50.dp.toPx(), 50.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(80.dp.toPx(), 50.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(20.dp.toPx(), 80.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(50.dp.toPx(), 80.dp.toPx()))
+        drawCircle(Color.Gray, 10.dp.toPx(), Offset(80.dp.toPx(), 80.dp.toPx()))
     }
 }
