@@ -1,5 +1,6 @@
 package io.oworld.ohchild
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -18,6 +19,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import io.oworld.ohchild.ui.theme.OhChildTheme
@@ -29,17 +31,13 @@ class RecordActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             OhChildTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    RecordPage()
-                }
+                RecordPage()
             }
         }
     }
 }
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun RecordPage() {
@@ -59,7 +57,11 @@ fun RecordPage() {
                 },
                 navigationIcon = {
                     IconButton(onClick = { activity.finish() }) {
-                        Icon(Icons.Filled.ArrowBack, "backIcon")
+                        Icon(
+                            Icons.Filled.ArrowBack,
+                            "backIcon",
+                            tint = MaterialTheme.colorScheme.onPrimary
+                        )
                     }
                 },
                 colors = TopAppBarDefaults.smallTopAppBarColors(
@@ -67,97 +69,107 @@ fun RecordPage() {
                     titleContentColor = Color.White,
                 ),
             )
-        }, content = {
-            if (clearRecordsDialog) {
-                AlertDialog(
-                    onDismissRequest = {
+        }
+    ) {
+        if (clearRecordsDialog) {
+            AlertDialog(
+                onDismissRequest = {
+                    clearRecordsDialog = false
+                },
+                title = {
+                    Text("Clear All Records Confirmation")
+                },
+                text = {
+                    Text("Do you confirm to clear all records?")
+                },
+                confirmButton = {
+                    TextButton(onClick = {
+                        recordRepo.deleteAll()
                         clearRecordsDialog = false
-                    },
-                    title = {
-                        Text("Clear All Records Confirmation")
-                    },
-                    text = {
-                        Text("Do you confirm to clear all records?")
-                    },
-                    confirmButton = {
-                        TextButton(onClick = {
-                            recordRepo.deleteAll()
-                            clearRecordsDialog = false
-                        }) {
-                            Text("Yes")
-                        }
-                    },
-                    dismissButton = {
-                        TextButton(onClick = {
-                            clearRecordsDialog = false
-                        }) {
-                            Text("No")
-                        }
-                    },
+                    }) {
+                        Text("Yes")
+                    }
+                },
+                dismissButton = {
+                    TextButton(onClick = {
+                        clearRecordsDialog = false
+                    }) {
+                        Text("No")
+                    }
+                },
+            )
+        }
+
+        val paddingStart = it.calculateLeftPadding(LayoutDirection.Ltr) + 8.dp
+        val paddingTop = it.calculateTopPadding() + 8.dp
+        val paddingEnd = it.calculateRightPadding(LayoutDirection.Ltr) + 8.dp
+        val paddingBottom = it.calculateBottomPadding() + 8.dp
+        Column(
+            modifier = Modifier
+                .padding(
+                    start = paddingStart,
+                    top = paddingTop,
+                    end = paddingEnd,
+                    bottom = paddingBottom
+                )
+                .fillMaxSize()
+        ) {
+            Row(modifier = Modifier.fillMaxWidth()) {
+                Text(
+                    "Date",
+                    modifier = Modifier.width(160.dp),
+                    textAlign = TextAlign.Start,
+                    fontWeight = FontWeight.Bold
+                )
+                Text(
+                    "Duration",
+                    modifier = Modifier.width(130.dp),
+                    textAlign = TextAlign.Start,
+                    fontWeight = FontWeight.Bold
+                )
+                Text(
+                    "Score",
+                    modifier = Modifier.fillMaxWidth(),
+                    textAlign = TextAlign.End,
+                    fontWeight = FontWeight.Bold
                 )
             }
-            Column(
-                modifier = Modifier
-                    .padding(it)
-                    .fillMaxSize()
+            LazyColumn(modifier = Modifier.fillMaxWidth()) {
+                items(items = records, itemContent = { record ->
+                    val dateString = DateFormat.getDateInstance().format(Date(record.date))
+                    val durationString = String.format("%.2f", record.duration)
+                    Row(modifier = Modifier.fillMaxWidth()) {
+                        Text(
+                            dateString,
+                            modifier = Modifier.width(160.dp),
+                            textAlign = TextAlign.Start
+                        )
+                        Text(
+                            durationString,
+                            modifier = Modifier.width(130.dp),
+                            textAlign = TextAlign.Start
+                        )
+                        Text(
+                            record.score.toString(),
+                            modifier = Modifier.fillMaxWidth(),
+                            textAlign = TextAlign.End
+                        )
+                    }
+                })
+            }
+            Spacer(Modifier.weight(1f))
+            Button(
+                onClick = { clearRecordsDialog = true },
+                modifier = Modifier.fillMaxWidth(),
             ) {
-                Row(modifier = Modifier.fillMaxWidth()) {
-                    Text(
-                        "Date",
-                        modifier = Modifier.width(180.dp),
-                        textAlign = TextAlign.Start,
-                        fontWeight = FontWeight.Bold
-                    )
-                    Text(
-                        "Duration",
-                        modifier = Modifier.width(120.dp),
-                        textAlign = TextAlign.Start,
-                        fontWeight = FontWeight.Bold
-                    )
-                    Text(
-                        "Score",
-                        modifier = Modifier.fillMaxWidth(),
-                        textAlign = TextAlign.End,
-                        fontWeight = FontWeight.Bold
-                    )
-                }
-                LazyColumn(modifier = Modifier.fillMaxWidth()) {
-                    items(items = records, itemContent = { record ->
-                        val dateString = DateFormat.getDateInstance().format(Date(record.date))
-                        val durationString = String.format("%.2f", record.duration)
-                        Row(modifier = Modifier.fillMaxWidth()) {
-                            Text(
-                                dateString,
-                                modifier = Modifier.width(180.dp),
-                                textAlign = TextAlign.Start
-                            )
-                            Text(
-                                durationString,
-                                modifier = Modifier.width(120.dp),
-                                textAlign = TextAlign.Start
-                            )
-                            Text(
-                                record.score.toString(),
-                                modifier = Modifier.fillMaxWidth(),
-                                textAlign = TextAlign.End
-                            )
-                        }
-                    })
-                }
-                Spacer(Modifier.weight(1f))
-                ElevatedButton(
-                    onClick = { clearRecordsDialog = true },
-                    modifier = Modifier.fillMaxWidth(),
-                ) {
-                    Icon(
-                        painter = painterResource(R.drawable.ic_baseline_delete_forever_24),
-                        contentDescription = "Delete",
-                        modifier = Modifier.size(40.dp)
-                    )
-                    Text("Clear All Records", fontSize = 30.sp)
-                }
+                Icon(
+                    painter = painterResource(R.drawable.ic_baseline_delete_forever_24),
+                    contentDescription = "Delete",
+                    modifier = Modifier.size(40.dp)
+                )
+                Text("Clear All", fontSize = 40.sp)
             }
         }
-    )
+    }
 }
 
