@@ -11,5 +11,5 @@ val Green200 = Color(0xffc6ff9b)
 
 //Dark Theme
 val Orange900 = Color(0xffff7700)
-val Blue900 = Color(0xff00005a)
-val Blue800 = Color(0xff001d88)
+val Blue900 = Color(0xff000031)
+val Blue800 = Color(0xff00005a)

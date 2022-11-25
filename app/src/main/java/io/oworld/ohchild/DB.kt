@@ -12,6 +12,8 @@ data class Record(
     @NonNull
     val id: Int = 0,
     var date: Long,
+    var stage: Int,
+    var digit: Int,
     var duration: Float,
     var score: Int
 )
@@ -53,6 +55,7 @@ abstract class AppDatabase : RoomDatabase() {
 
 class RecordRepo(private val recordDao: RecordDao) {
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
+
     val allRecords = recordDao.getAll()
 
     fun insert(record: Record) {

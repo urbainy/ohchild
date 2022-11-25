@@ -1,5 +1,6 @@
 package io.oworld.ohchild
 
+import android.content.Context
 import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Bundle
@@ -9,6 +10,8 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Refresh
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -17,14 +20,19 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.datastore.preferences.preferencesDataStore
 import io.oworld.ohchild.ui.theme.OhChildTheme
 import io.oworld.ohchild.ui.theme.Red500
+import kotlinx.coroutines.flow.Flow
 import java.text.DecimalFormat
+import kotlin.math.pow
 
+private val Context.dataStore by preferencesDataStore(name = "user_preferences")
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,6 +61,8 @@ fun MainPage(useDices: IntArray) {
     var currentSecond by remember { mutableStateOf(defaultSecond) }
     var timeDialog by remember { mutableStateOf(false) }
     var isRunning by remember { mutableStateOf(false) }
+    var isPause by remember { mutableStateOf(false) }
+    var finished by remember { mutableStateOf(false) }
     var totalCorrectAnswers by remember { mutableStateOf(0) }
     var a by remember { mutableStateOf(1) }
     var b by remember { mutableStateOf(1) }
@@ -64,16 +74,43 @@ fun MainPage(useDices: IntArray) {
     val view = LocalView.current
     val mContext = LocalContext.current
     val applicationContext = mContext.applicationContext
+    val userPreferencesRepo = UserPreferencesRepo(mContext.dataStore)
+    val userPreferencesFlow: Flow<UserPreferences> = userPreferencesRepo.userPreferencesFlow
 
     val db = AppDatabase.getInstance(applicationContext)
     val recordDao = db.recordDao()
     val recordRepo = RecordRepo(recordDao)
 
-    Scaffold {
-        val paddingStart = it.calculateLeftPadding(LayoutDirection.Ltr) + 8.dp
-        val paddingTop = it.calculateTopPadding() + 8.dp
-        val paddingEnd = it.calculateRightPadding(LayoutDirection.Ltr) + 8.dp
-        val paddingBottom = it.calculateBottomPadding() + 8.dp
+    var stage by remember { mutableStateOf(0) }
+    val stageIcons = listOf(
+        Pair(R.drawable.ic_baseline_casino_24, "Dice"),
+        Pair(R.drawable.ic_baseline_add_circle_outline_24, "Plus"),
+        Pair(R.drawable.ic_outline_remove_circle_outline_24, "Minus"),
+        Pair(R.drawable.ic_round_highlight_off_24, "Multiply"),
+        Pair(R.drawable.ic_baseline_block_24, "Divide")
+    )
+    var digit by remember { mutableStateOf(1) }
+
+    val userPreference by userPreferencesFlow.collectAsState(
+        initial = UserPreferences(
+            stage = 0,
+            digit = 1,
+            minute = 3L,
+            second = 0L
+        )
+    )
+    stage = userPreference.stage
+    digit = userPreference.digit
+    defaultMinute = userPreference.minute
+    defaultSecond = userPreference.second
+    currentMinute = userPreference.minute
+    currentSecond = userPreference.second
+
+    Scaffold { paddingValue ->
+        val paddingStart = paddingValue.calculateLeftPadding(LayoutDirection.Ltr) + 8.dp
+        val paddingTop = paddingValue.calculateTopPadding() + 8.dp
+        val paddingEnd = paddingValue.calculateRightPadding(LayoutDirection.Ltr) + 8.dp
+        val paddingBottom = paddingValue.calculateBottomPadding() + 8.dp
 
         if (timeDialog) {
             var setMinute by remember { mutableStateOf(defaultMinute.toFloat()) }
@@ -105,6 +142,8 @@ fun MainPage(useDices: IntArray) {
                     TextButton(onClick = {
                         defaultMinute = setMinute.toLong()
                         defaultSecond = setSecond.toLong()
+                        userPreferencesRepo.updateMinute(defaultMinute)
+                        userPreferencesRepo.updateSecond(defaultSecond)
                         currentMinute = defaultMinute
                         currentSecond = defaultSecond
                         timeDialog = false
@@ -138,11 +177,14 @@ fun MainPage(useDices: IntArray) {
                         Record(
                             date = timestamp,
                             duration = duration,
+                            stage = stage,
+                            digit = digit,
                             score = totalCorrectAnswers
                         )
                     recordRepo.insert(record)
                     MediaPlayer.create(mContext, R.raw.finish).start()
                     isRunning = false
+                    finished = true
                 }
             }.start()
             MediaPlayer.create(mContext, R.raw.start).start()
@@ -160,6 +202,7 @@ fun MainPage(useDices: IntArray) {
                 countDownTimer = null
                 currentMinute = defaultMinute
                 currentSecond = defaultSecond
+                totalCorrectAnswers = 0
                 hundredNumber = 0
                 decadeNumber = 0
                 individualNumber = 0
@@ -167,9 +210,37 @@ fun MainPage(useDices: IntArray) {
         }
 
         fun prepareCalcNumber() {
-            a = (1..9).shuffled().last()
-            b = (1..9).shuffled().last()
-            correctAnswer = a + b
+            when (stage) {
+                0, 1 -> {
+                    a = (1 until (10.toFloat().pow(digit)).toInt()).shuffled().last()
+                    b = (1 until (10.toFloat().pow(digit)).toInt()).shuffled().last()
+                    correctAnswer = a + b
+                }
+                2 -> {
+                    a = (1 until (10.toFloat().pow(digit)).toInt()).shuffled().last()
+                    b = (1 until (10.toFloat().pow(digit)).toInt()).shuffled().last()
+                    if (a < b) {
+                        val t = a
+                        a = b
+                        b = t
+                    }
+                    correctAnswer = a - b
+                }
+                3 -> {
+                    do {
+                        a = (1 until (10.toFloat().pow(digit)).toInt()).shuffled().last()
+                        b = (1 until (10.toFloat().pow(digit)).toInt()).shuffled().last()
+                    } while (a * b > 999)
+                    correctAnswer = a * b
+                }
+                4 -> {
+                    do {
+                        a = (1 until (10.toFloat().pow(digit)).toInt()).shuffled().last()
+                        b = (1 until (10.toFloat().pow(digit)).toInt()).shuffled().last()
+                    } while ((a < b) || (a % b != 0))
+                    correctAnswer = a / b
+                }
+            }
         }
 
         Column(
@@ -184,7 +255,7 @@ fun MainPage(useDices: IntArray) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 ElevatedButton(
                     onClick = { timeDialog = true },
-                    enabled = !isRunning,
+                    enabled = !isRunning && !isPause,
                 ) {
                     val f = DecimalFormat("00")
                     Icon(
@@ -199,45 +270,62 @@ fun MainPage(useDices: IntArray) {
                 }
 
                 Spacer(Modifier.weight(1f))
-                IconButton(onClick = {
-                    isRunning = false
-                    resetCountDownTimer()
-                    totalCorrectAnswers = 0
-                }, modifier = Modifier.size(60.dp)) {
-                    Icon(
-                        painter = painterResource(R.drawable.ic_baseline_stop_circle_24),
-                        contentDescription = "Stop",
-                        modifier = Modifier.size(60.dp),
-                        tint = MaterialTheme.colorScheme.primary
-                    )
-                }
-                if (isRunning) {
-                    IconButton(
-                        onClick = { isRunning = !isRunning; pauseCountDownTimer() },
-                        modifier = Modifier.size(60.dp)
-                    ) {
+                if (finished) {
+                    IconButton(onClick = {
+                        finished = false
+                        resetCountDownTimer()
+                    }, modifier = Modifier.size(60.dp)) {
                         Icon(
-                            painter = painterResource(R.drawable.ic_baseline_pause_circle_outline_24),
-                            contentDescription = "Pause",
+                            Icons.Rounded.Refresh,
+                            contentDescription = "Reset",
                             modifier = Modifier.size(60.dp),
                             tint = MaterialTheme.colorScheme.primary
                         )
                     }
                 } else {
                     IconButton(onClick = {
-                        isRunning = !isRunning
-                        startCountDownTimer()
-                        prepareCalcNumber()
+                        isRunning = false
+                        isPause = false
+                        resetCountDownTimer()
                     }, modifier = Modifier.size(60.dp)) {
                         Icon(
-                            painter = painterResource(R.drawable.ic_baseline_play_circle_outline_24),
-                            contentDescription = "Start",
+                            painter = painterResource(R.drawable.ic_baseline_stop_circle_24),
+                            contentDescription = "Stop",
                             modifier = Modifier.size(60.dp),
                             tint = MaterialTheme.colorScheme.primary
                         )
                     }
+                    if (isRunning && !isPause) {
+                        IconButton(
+                            onClick = { isPause = true; pauseCountDownTimer() },
+                            modifier = Modifier.size(60.dp)
+                        ) {
+                            Icon(
+                                painter = painterResource(R.drawable.ic_baseline_pause_circle_outline_24),
+                                contentDescription = "Pause",
+                                modifier = Modifier.size(60.dp),
+                                tint = MaterialTheme.colorScheme.primary
+                            )
+                        }
+                    } else {
+                        IconButton(onClick = {
+                            isRunning = true
+                            isPause = false
+                            startCountDownTimer()
+                            prepareCalcNumber()
+                        }, modifier = Modifier.size(60.dp)) {
+                            Icon(
+                                painter = painterResource(R.drawable.ic_baseline_play_circle_outline_24),
+                                contentDescription = "Start",
+                                modifier = Modifier.size(60.dp),
+                                tint = MaterialTheme.colorScheme.primary
+                            )
+                        }
+                    }
                 }
             }
+
+            Spacer(Modifier.height(8.dp))
 
             Row(
                 verticalAlignment = Alignment.CenterVertically,
@@ -245,9 +333,10 @@ fun MainPage(useDices: IntArray) {
             ) {
                 Text(
                     "Correct Answers: ",
-                    fontSize = 30.sp,
+                    fontSize = 25.sp,
                     fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.primary
+                    color = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.width(220.dp)
                 )
                 AnimatedContent(
                     targetState = totalCorrectAnswers,
@@ -287,18 +376,148 @@ fun MainPage(useDices: IntArray) {
 
             }
 
-            Spacer(Modifier.weight(1f))
+            Spacer(Modifier.height(8.dp))
 
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceAround
-            ) {
-                if (isRunning) {
-                    ChooseDice(useDices = useDices, i = a)
-                    ChooseDice(useDices = useDices, i = b)
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text(
+                    "Digit Difficulty:",
+                    fontSize = 25.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.width(220.dp)
+                )
+                Slider(
+                    value = digit.toFloat(),
+                    onValueChange = {
+                        digit = it.toInt(); userPreferencesRepo.updateDigit(it.toInt())
+                    },
+                    valueRange = 1f..3f,
+                    steps = 1,
+                    thumb = {
+                        ElevatedButton(
+                            onClick = {},
+                            modifier = Modifier.size(30.dp),
+                            contentPadding = PaddingValues(0.dp)
+                        ) { Text("$digit", fontSize = 25.sp) }
+                    },
+                    enabled = (stage != 0) && (!isRunning)
+                )
+            }
+
+            Spacer(Modifier.height(16.dp))
+
+            TabRow(selectedTabIndex = stage) {
+                stageIcons.forEachIndexed { index, icon ->
+                    Tab(
+                        selected = stage == index,
+                        onClick = {
+                            if (index == 0) {
+                                digit = 1
+                                userPreferencesRepo.updateDigit(1)
+                            }
+                            stage = index
+                            userPreferencesRepo.updateStage(index)
+                        },
+                        icon = {
+                            Icon(
+                                painter = painterResource(icon.first),
+                                contentDescription = icon.second,
+                                modifier = Modifier.size(40.dp)
+                            )
+                        },
+                        enabled = !isRunning
+                    )
                 }
             }
-            Spacer(Modifier.height(100.dp))
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(150.dp),
+                horizontalArrangement = Arrangement.SpaceEvenly,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                when (stage) {
+                    0 -> {
+                        if (isRunning) {
+                            ChooseDice(useDices = useDices, i = a)
+                            ChooseDice(useDices = useDices, i = b)
+                        } else {
+                            Dice1()
+                            Text("+", fontSize = 100.sp, color = MaterialTheme.colorScheme.primary)
+                            Dice1()
+                        }
+                    }
+                    1 -> {
+                        if (isRunning) {
+                            Text(
+                                "$a + $b",
+                                fontSize = 100.sp,
+                                color = MaterialTheme.colorScheme.primary
+                            )
+                        } else {
+                            Text(
+                                "1 + 1",
+                                fontSize = 100.sp,
+                                color = MaterialTheme.colorScheme.primary
+                            )
+                        }
+                    }
+                    2 -> {
+                        if (isRunning) {
+                            Text(
+                                "$a - $b",
+                                fontSize = 100.sp,
+                                color = MaterialTheme.colorScheme.primary
+                            )
+                        } else {
+                            Text(
+                                "1 - 1",
+                                fontSize = 100.sp,
+                                color = MaterialTheme.colorScheme.primary
+                            )
+                        }
+                    }
+                    3 -> {
+                        if (isRunning) {
+                            Text(
+                                "$a × $b",
+                                fontSize = 100.sp,
+                                color = MaterialTheme.colorScheme.primary,
+                            )
+                        } else {
+                            Text(
+                                "1 × 1",
+                                fontSize = 100.sp,
+                                color = MaterialTheme.colorScheme.primary
+                            )
+                        }
+                    }
+                    4 -> {
+                        if (isRunning) {
+                            var textSize by remember { mutableStateOf(100.sp) }
+                            Text(
+                                "$a / $b",
+                                fontSize = textSize,
+                                color = MaterialTheme.colorScheme.primary,
+                                overflow = TextOverflow.Ellipsis,
+                                onTextLayout = { result ->
+                                    if (result.isLineEllipsized(0)) {
+                                        textSize /= 1.3
+                                    }
+                                }
+                            )
+                        } else {
+                            Text(
+                                "1 / 1",
+                                fontSize = 100.sp,
+                                color = MaterialTheme.colorScheme.primary,
+                            )
+                        }
+                    }
+                }
+            }
+
+            Spacer(Modifier.weight(1f))
 
             Row(
                 modifier = Modifier.fillMaxWidth(),

@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import io.oworld.ohchild.ui.theme.OhChildTheme
 import java.text.DateFormat
+import java.text.DateFormat.SHORT
 import java.util.*
 
 class RecordActivity : ComponentActivity() {
@@ -117,13 +118,25 @@ fun RecordPage() {
             Row(modifier = Modifier.fillMaxWidth()) {
                 Text(
                     "Date",
-                    modifier = Modifier.width(160.dp),
+                    modifier = Modifier.width(110.dp),
+                    textAlign = TextAlign.Start,
+                    fontWeight = FontWeight.Bold
+                )
+                Text(
+                    "Stage",
+                    modifier = Modifier.width(70.dp),
+                    textAlign = TextAlign.Start,
+                    fontWeight = FontWeight.Bold
+                )
+                Text(
+                    "Digit",
+                    modifier = Modifier.width(60.dp),
                     textAlign = TextAlign.Start,
                     fontWeight = FontWeight.Bold
                 )
                 Text(
                     "Duration",
-                    modifier = Modifier.width(130.dp),
+                    modifier = Modifier.width(80.dp),
                     textAlign = TextAlign.Start,
                     fontWeight = FontWeight.Bold
                 )
@@ -136,17 +149,38 @@ fun RecordPage() {
             }
             LazyColumn(modifier = Modifier.fillMaxWidth()) {
                 items(items = records, itemContent = { record ->
-                    val dateString = DateFormat.getDateInstance().format(Date(record.date))
+                    val dateString = DateFormat.getDateInstance(SHORT).format(Date(record.date))
                     val durationString = String.format("%.2f", record.duration)
+                    val stageString = when (record.stage) {
+                        0 -> "Dice"
+                        1 -> "+"
+                        2 -> "-"
+                        3 -> "×"
+                        4 -> "/"
+                        else -> {
+                            ""
+                        }
+                    }
+                    val digitString = record.digit.toString()
                     Row(modifier = Modifier.fillMaxWidth()) {
                         Text(
                             dateString,
-                            modifier = Modifier.width(160.dp),
+                            modifier = Modifier.width(110.dp),
+                            textAlign = TextAlign.Start
+                        )
+                        Text(
+                            stageString,
+                            modifier = Modifier.width(70.dp),
+                            textAlign = TextAlign.Start
+                        )
+                        Text(
+                            digitString,
+                            modifier = Modifier.width(60.dp),
                             textAlign = TextAlign.Start
                         )
                         Text(
                             durationString,
-                            modifier = Modifier.width(130.dp),
+                            modifier = Modifier.width(80.dp),
                             textAlign = TextAlign.Start
                         )
                         Text(
