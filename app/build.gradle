@@ -13,7 +13,7 @@ android {
         minSdk 29
         targetSdk 33
         versionCode 2
-        versionName "1.1"
+        versionName "1.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -63,11 +63,8 @@ dependencies {
     implementation "androidx.compose.ui:ui:$compose_ui"
     implementation "androidx.compose.ui:ui-tooling-preview:$compose_ui"
     implementation "androidx.compose.material3:material3:$compose_material"
-    implementation "androidx.compose.runtime:runtime-livedata:1.3.1"
+    implementation "androidx.compose.runtime:runtime-livedata:1.3.3"
     implementation "androidx.datastore:datastore-preferences:1.0.0"
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.4'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_ui"
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_ui"
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_ui"

@@ -147,7 +147,9 @@ fun RecordPage() {
                     fontWeight = FontWeight.Bold
                 )
             }
-            LazyColumn(modifier = Modifier.fillMaxWidth()) {
+            LazyColumn(modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f)) {
                 items(items = records, itemContent = { record ->
                     val dateString = DateFormat.getDateInstance(SHORT).format(Date(record.date))
                     val durationString = String.format("%.2f", record.duration)
@@ -191,7 +193,7 @@ fun RecordPage() {
                     }
                 })
             }
-            Spacer(Modifier.weight(1f))
+            Spacer(Modifier.height(10.dp))
             Button(
                 onClick = { clearRecordsDialog = true },
                 modifier = Modifier.fillMaxWidth(),
